@@ -1,3 +1,4 @@
+using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerLocomotion : MonoBehaviour
 {
     CharacterController characterController;
-    Transform playerContainer, cameraContainer;
+    Transform playerContainer, cameraContainer, weapon1PContainer;
 
     public float speed = 6.0f;
     public float jumpSpeed = 10f;
@@ -25,18 +26,19 @@ public class PlayerLocomotion : MonoBehaviour
     InputAction crouchAction;
     InputAction lookAction;
     InputAction previousAction;
+    InputAction SwapAction;
 
     void OnEnable()
     {
         playerInput = GetComponent<PlayerInput>();
-
         var map = playerInput.currentActionMap;
-
+        
         moveAction = map.FindAction("Move", true);
         jumpAction = map.FindAction("Jump", true);
         crouchAction = map.FindAction("Crouch", true);
         lookAction = map.FindAction("Look", true);
         previousAction = map.FindAction("Previous", true);
+        SwapAction = map.FindAction("Next", true);
     }
 
 
@@ -45,16 +47,17 @@ public class PlayerLocomotion : MonoBehaviour
         Cursor.visible = false;
         characterController = GetComponent<CharacterController>();
         SetCurrentCamera();
+        SetCurrentWeapon();
     }
 
     void Update()
     {
         Locomotion();
         RotateAndLook();
-
         PerspectiveCheck();
+        WeaponsCheck();
     }
-
+    
     void SetCurrentCamera()
     {
         SwitchPerspective switchPerspective = GetComponent<SwitchPerspective>();
@@ -70,6 +73,18 @@ public class PlayerLocomotion : MonoBehaviour
         }
 
     }
+    void SetCurrentWeapon()
+    {
+        SwitchWeapons switchWeapons = GetComponent<SwitchWeapons>();
+        if (switchWeapons.GetWeapons() == SwitchWeapons.Weapons.Gun)
+        {
+            weapon1PContainer = gameObject.transform.Find("Guns");
+        }
+        else
+        {
+            weapon1PContainer = gameObject.transform.Find("Bows");
+        }
+    }
 
     void Locomotion()
     {
@@ -79,7 +94,7 @@ public class PlayerLocomotion : MonoBehaviour
             moveDirection = new Vector3(move.x, 0f, move.y);
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
-            if (jumpAction.triggered)
+            if (jumpAction.IsPressed())
             {
                 moveDirection.y = jumpSpeed;
             }
@@ -134,5 +149,41 @@ public class PlayerLocomotion : MonoBehaviour
                 SetCurrentCamera();
             }
         }
+    }
+    void WeaponsCheck()
+    {
+        SwitchPerspective switchPerspective = GetComponent<SwitchPerspective>();
+        if (switchPerspective.GetPerspective() == SwitchPerspective.Perspective.First) 
+        {
+            if (SwapAction.WasPressedThisFrame())
+            {
+                SwitchWeapons switchWeapons = GetComponent<SwitchWeapons>();
+
+                if (switchWeapons != null)
+                {
+                    if (switchWeapons.GetWeapons() == SwitchWeapons.Weapons.Gun)
+                    {
+                        switchWeapons.SetWeapons(SwitchWeapons.Weapons.Bow);
+                    }
+                    else
+                    {
+                        switchWeapons.SetWeapons(SwitchWeapons.Weapons.Gun);
+                    }
+
+                    SetCurrentWeapon();
+                }
+            }
+        }
+        else
+        {
+            SwitchWeapons switchWeapons = GetComponent<SwitchWeapons>();
+
+            if (switchWeapons != null)
+            {
+                switchWeapons.SetWeapons(SwitchWeapons.Weapons.Gun);
+                SetCurrentWeapon();
+            }
+        }
+
     }
 }
