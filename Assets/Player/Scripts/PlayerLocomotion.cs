@@ -8,7 +8,8 @@ using UnityEngine.InputSystem;
 public class PlayerLocomotion : MonoBehaviour
 {
     CharacterController characterController;
-    Transform playerContainer, cameraContainer, weapon1PContainer;
+    Transform playerContainer, cameraContainer, WeaponContainer;
+    private int Perspective;
 
     public float speed = 6.0f;
     public float jumpSpeed = 10f;
@@ -65,11 +66,13 @@ public class PlayerLocomotion : MonoBehaviour
         {
             playerContainer = gameObject.transform.Find("Container1P");
             cameraContainer = playerContainer.transform.Find("Camera1PContainer");
+            Perspective = 1;
         }
         else
         {
             playerContainer = gameObject.transform.Find("Container3P");
             cameraContainer = playerContainer.transform.Find("Camera3PContainer");
+            Perspective = 3;
         }
 
     }
@@ -78,11 +81,11 @@ public class PlayerLocomotion : MonoBehaviour
         SwitchWeapons switchWeapons = GetComponent<SwitchWeapons>();
         if (switchWeapons.GetWeapons() == SwitchWeapons.Weapons.Gun)
         {
-            weapon1PContainer = gameObject.transform.Find("Guns");
+            WeaponContainer = gameObject.transform.Find("Guns");
         }
         else
         {
-            weapon1PContainer = gameObject.transform.Find("Bows");
+            WeaponContainer = gameObject.transform.Find("Bows");
         }
     }
 
@@ -125,8 +128,12 @@ public class PlayerLocomotion : MonoBehaviour
         rotateY = Mathf.Clamp(rotateY, lookUpClamp, lookDownClamp);
 
         transform.Rotate(0f, rotateX, 0f);
-
         cameraContainer.transform.localRotation = Quaternion.Euler(rotateY, 0f, 0f);
+
+        if (Perspective == 3)
+            WeaponContainer.transform.localRotation = Quaternion.Euler(90 + rotateY, 0f, 0f);
+        else
+            WeaponContainer.transform.localRotation = Quaternion.Euler(90, 0f, 0f);
     }
 
     void PerspectiveCheck()
@@ -140,10 +147,12 @@ public class PlayerLocomotion : MonoBehaviour
                 if (switchPerspective.GetPerspective() == SwitchPerspective.Perspective.First)
                 {
                     switchPerspective.SetPerspective(SwitchPerspective.Perspective.Third);
+                    Perspective = 3;
                 }
                 else
                 {
                     switchPerspective.SetPerspective(SwitchPerspective.Perspective.First);
+                    Perspective = 1;
                 }
 
                 SetCurrentCamera();
