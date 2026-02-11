@@ -8,6 +8,8 @@ public class PlayerAttack : MonoBehaviour
 {
     Transform playerContainer, WeaponContainer;
     Transform cameraTransform;
+    [SerializeField] GameObject shotSpawn;
+    [SerializeField] GameObject shot;
     [SerializeField]
     float range = 10f;
     [SerializeField]
@@ -16,6 +18,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     LayerMask layermask;
     InputAction FireAction;
+
+    [SerializeField] float rateOfFire = 2f;
+    [SerializeField] float shotSpeed = 800f;
+    [SerializeField] float ElapsedTime = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
@@ -26,7 +32,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
-
+        ElapsedTime = 0;
     }
     // Update is called once per frame
     void Update()
@@ -60,7 +66,20 @@ public class PlayerAttack : MonoBehaviour
             }
             else //Bow
             {
-                Debug.Log("NEED TO CODE - ARROW LAUNCHED");
+                if (ElapsedTime%60 < 0)
+                {
+                    GameObject shotInstance = Instantiate(shot,
+                                                  shotSpawn.transform.position,
+                                                  shotSpawn.transform.rotation);
+
+                    shotInstance.GetComponent<Rigidbody>()
+                        .AddForce(shotSpawn.transform.forward * shotSpeed);
+                    ElapsedTime = rateOfFire;
+                }
+                else
+                {
+                    ElapsedTime -= Time.deltaTime;
+                }
             }
         }
     }

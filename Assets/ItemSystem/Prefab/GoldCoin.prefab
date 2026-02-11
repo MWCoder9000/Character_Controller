@@ -158,10 +158,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Item
   itemPrefab: {fileID: 3802731685408979259}
   icon: {fileID: 0}
-  itemName: 
+  itemName: Gold Coin
   description: Gold Coin is useless for now
+  SafeTime: 1
   weight: 0
   quantity: 1
   maxStackableQuantity: 1
   isStorable: 0
   isConsumable: 1
+  ResetOnExit: 0
+  isPickupOnCollision: 0

@@ -8,6 +8,7 @@ public class HitManager : MonoBehaviour
 
     void Hit(float rawDamage)
     {
+        Debug.Log("HitPoints: " + hitPoints);
         hitPoints -= rawDamage; 
         if(hitPoints < 1 )
         {

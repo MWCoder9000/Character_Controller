@@ -8,8 +8,9 @@ using UnityEngine.InputSystem;
 public class PlayerLocomotion : MonoBehaviour
 {
     CharacterController characterController;
-    Transform playerContainer, cameraContainer, WeaponContainer;
+    Transform playerContainer, cameraContainer, WeaponContainer, ArrowSpawnerContainer;
     private int Perspective;
+    private int Weapon;
 
     public float speed = 6.0f;
     public float jumpSpeed = 10f;
@@ -49,6 +50,7 @@ public class PlayerLocomotion : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         SetCurrentCamera();
         SetCurrentWeapon();
+        ArrowSpawnerContainer = gameObject.transform.Find("ArrowSpawner");
     }
 
     void Update()
@@ -82,10 +84,12 @@ public class PlayerLocomotion : MonoBehaviour
         if (switchWeapons.GetWeapons() == SwitchWeapons.Weapons.Gun)
         {
             WeaponContainer = gameObject.transform.Find("Guns");
+            Weapon = 1;
         }
         else
         {
             WeaponContainer = gameObject.transform.Find("Bows");
+            Weapon = 2;
         }
     }
 
@@ -131,9 +135,17 @@ public class PlayerLocomotion : MonoBehaviour
         cameraContainer.transform.localRotation = Quaternion.Euler(rotateY, 0f, 0f);
 
         if (Perspective == 3)
+        {
             WeaponContainer.transform.localRotation = Quaternion.Euler(90 + rotateY, 0f, 0f);
+        }
         else
-            WeaponContainer.transform.localRotation = Quaternion.Euler(90, 0f, 0f);
+        {
+            if (Weapon == 1)
+            {
+                WeaponContainer.transform.localRotation = Quaternion.Euler(90, 0f, 0f);
+            }
+        }
+               
     }
 
     void PerspectiveCheck()

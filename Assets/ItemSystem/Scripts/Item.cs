@@ -8,17 +8,18 @@ public class Item : MonoBehaviour
 {
     public GameObject itemPrefab;
     public Sprite icon;
-    public float SaveTime = 1;
+    
     float ElapsedTime;
     public string itemName;
     [TextArea(4, 16)]
     public string description;
-    public float TrapDelay = 1f;
+    public float SafeTime = 1;
     public float weight = 0;
     public int quantity = 1;
     public int maxStackableQuantity = 1;
     public bool isStorable = false;
     public bool isConsumable = true;
+    public bool ResetOnExit = false;
     [SerializeField]
     bool isPickupOnCollision = false;
     bool isTrap = false;
@@ -31,7 +32,7 @@ public class Item : MonoBehaviour
             if(gameObject.tag == "Trap")
             {
                 isTrap = true;
-                ElapsedTime = SaveTime;
+                ElapsedTime = SafeTime;
             }
             else
             {
@@ -47,7 +48,7 @@ public class Item : MonoBehaviour
             if (ElapsedTime%60 < 0)
             {
                 other.SendMessageUpwards("Hit", 10000, SendMessageOptions.DontRequireReceiver);
-                ElapsedTime = SaveTime;
+                ElapsedTime = SafeTime;
             }
             else
             {
@@ -57,6 +58,13 @@ public class Item : MonoBehaviour
         else if (isPickupOnCollision && other.tag == "Player")
         {
             Interact();
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (isTrap && ResetOnExit)
+        {
+            ElapsedTime = SafeTime;
         }
     }
 
