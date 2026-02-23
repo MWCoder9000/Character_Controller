@@ -53,12 +53,15 @@ public class PlayerLocomotion : MonoBehaviour
 
     void Update()
     {
-        Locomotion();
-        RotateAndLook();
-        PerspectiveCheck();
-        WeaponsCheck();
+        //if (!GameManager.Instance.Dead && !GameManager.Instance.Paused)
+        //{
+            Locomotion();
+            RotateAndLook();
+            PerspectiveCheck();
+            WeaponsCheck();
+        //}
     }
-    
+
     void SetCurrentCamera()
     {
         SwitchPerspective switchPerspective = GetComponent<SwitchPerspective>();
@@ -74,7 +77,6 @@ public class PlayerLocomotion : MonoBehaviour
             cameraContainer = playerContainer.transform.Find("Camera3PContainer");
             Perspective = 3;
         }
-
     }
     void SetCurrentWeapon()
     {

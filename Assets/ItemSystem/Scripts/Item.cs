@@ -24,6 +24,7 @@ public class Item : MonoBehaviour
     [SerializeField]
     bool isPickupOnCollision = false;
     bool isTrap = false;
+    bool DmgTaken = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -44,21 +45,31 @@ public class Item : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (isTrap )
+        if (!GameManager.Instance.Dead)
         {
-            if (ElapsedTime%60 < 0)
+            if (isTrap)
             {
-                other.SendMessageUpwards("Hit", Damage, SendMessageOptions.DontRequireReceiver);
-                ElapsedTime = SafeTime;
+                if (ElapsedTime % 60 < 0)
+                {
+                    if(!DmgTaken)
+                    {
+                        other.SendMessageUpwards("Hit", Damage, SendMessageOptions.DontRequireReceiver);
+                        ElapsedTime = SafeTime;
+                        DmgTaken = true;
+                    }
+                    
+                }
+                else
+                {
+                    ElapsedTime -= Time.deltaTime;
+                    DmgTaken = false;
+                }
             }
-            else
+            else if (isPickupOnCollision && other.CompareTag("Player"))
             {
-                ElapsedTime -= Time.deltaTime;
+                Interact();
             }
-        }
-        else if (isPickupOnCollision && other.CompareTag("Player"))
-        {
-            Interact();
+
         }
     }
     private void OnTriggerExit(Collider other)

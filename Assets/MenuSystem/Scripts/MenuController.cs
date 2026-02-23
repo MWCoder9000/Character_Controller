@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MenuControls : MonoBehaviour
 {
     [SerializeField] string playScene = "PlayerSandboxScene";
-    [SerializeField] string mainMenuScene = "StartScene";
+    [SerializeField] string mainMenuScene = "StartScreen";
 
     [Tooltip("Drag in an options menu panel, if one exists")]
     [SerializeField] GameObject optionsMenuPanel;
@@ -28,7 +28,6 @@ public class MenuControls : MonoBehaviour
         if (player != null)
         {
             playerInput = player.GetComponent<PlayerInput>();
-
             var map = playerInput.currentActionMap;
 
             escapeAction = map.FindAction("Escape", true);
@@ -46,7 +45,7 @@ public class MenuControls : MonoBehaviour
         {
             if (IsPauseMenuAvailable)
             {
-                if (escapeAction.IsPressed())
+                if (escapeAction.triggered)
                 {
                     if (IsGamePaused)
                     {
@@ -97,6 +96,7 @@ public class MenuControls : MonoBehaviour
     public void StartGame()
     {
         Cursor.visible = false;
+       // GameManager.Instance.MainMenu = true;
         SceneManager.LoadScene(playScene);
     }
 

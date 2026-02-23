@@ -23,6 +23,7 @@ public class HealthManager : MonoBehaviour
 
         if (hitPoints <= 0)
         {
+            GameManager.Instance.Dead = true;
             Cursor.visible = true;
             Time.timeScale = 0f;
             DeathPanel.SetActive(true);

@@ -21,24 +21,9 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    #region Death
-    public string killedBy = "";
+    #region GameStates
     public bool Dead = false;
-    #endregion
-
-    #region map
-    public InputActionMap map;
-    PlayerInput playerInput;
-    private void OnEnable()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        playerInput = GetComponent<PlayerInput>();
-        map = playerInput.currentActionMap;
-    }
+    public bool Paused = false;
+    public bool MainMenu = true;
     #endregion
 }
