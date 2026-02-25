@@ -8,23 +8,34 @@ public class Item : MonoBehaviour
 {
     public GameObject itemPrefab;
     public Sprite icon;
-    
-    float ElapsedTime;
+
+    #region ItemInformation
     public string itemName;
     [TextArea(4, 16)]
     public string description;
-    public float Damage;
-    public float SafeTime = 1;
+    [SerializeField] int pointValue = 1;
     public float weight = 0;
     public int quantity = 1;
     public int maxStackableQuantity = 1;
-    public bool isStorable = false;
-    public bool isConsumable = true;
-    public bool ResetOnExit = false;
     [SerializeField]
     bool isPickupOnCollision = false;
+    #endregion
+
+    #region Item
+    public bool isStorable = false;
+    public bool isConsumable = true;
+    #endregion
+
+    #region Trap
     bool isTrap = false;
+    float ElapsedTime;
+    public float Damage;
+    public float SafeTime = 1;
     bool DmgTaken = false;
+    public bool ResetOnExit = false;
+    #endregion
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -112,6 +123,7 @@ public class Item : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+            GameManager.IncrementScore(pointValue);
         }
     }
     // Update is called once per frame

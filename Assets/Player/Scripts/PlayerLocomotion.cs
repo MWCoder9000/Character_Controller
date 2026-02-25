@@ -1,6 +1,7 @@
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,16 +10,20 @@ public class PlayerLocomotion : MonoBehaviour
 {
     CharacterController characterController;
     Transform playerContainer, cameraContainer, WeaponContainer, ArrowSpawnerContainer;
+    public Transform ArmContainer;
     private int Perspective;
     private int Weapon;
 
+    #region PlayerStats
     public float speed = 6.0f;
     public float jumpSpeed = 10f;
     public float mouseSensitivity = 0.5f;
     public float gravity = 20.0f;
     public float lookUpClamp = -30f;
     public float lookDownClamp = 60f;
+    #endregion
 
+    #region ActionKeys
     private Vector3 moveDirection = Vector3.zero;
     float rotateX, rotateY;
     PlayerInput playerInput;
@@ -28,6 +33,7 @@ public class PlayerLocomotion : MonoBehaviour
     InputAction lookAction;
     InputAction previousAction;
     InputAction SwapAction;
+    #endregion
 
     void OnEnable()
     {
@@ -45,21 +51,25 @@ public class PlayerLocomotion : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+
+        GameManager.ResetGame();
         characterController = GetComponent<CharacterController>();
         SetCurrentCamera();
-        SetCurrentWeapon();
+        WeaponContainer = gameObject.transform.Find("Guns");
+        Weapon = 1;
         ArrowSpawnerContainer = gameObject.transform.Find("ArrowSpawner");
     }
 
     void Update()
     {
-        //if (!GameManager.Instance.Dead && !GameManager.Instance.Paused)
-        //{
+        if (!GameManager.Instance.Dead && !GameManager.Instance.Paused)
+        {
             Locomotion();
             RotateAndLook();
             PerspectiveCheck();
             WeaponsCheck();
-        //}
+        }
     }
 
     void SetCurrentCamera()
@@ -76,20 +86,6 @@ public class PlayerLocomotion : MonoBehaviour
             playerContainer = gameObject.transform.Find("Container3P");
             cameraContainer = playerContainer.transform.Find("Camera3PContainer");
             Perspective = 3;
-        }
-    }
-    void SetCurrentWeapon()
-    {
-        SwitchWeapons switchWeapons = GetComponent<SwitchWeapons>();
-        if (switchWeapons.GetWeapons() == SwitchWeapons.Weapons.Gun)
-        {
-            WeaponContainer = gameObject.transform.Find("Guns");
-            Weapon = 1;
-        }
-        else
-        {
-            WeaponContainer = gameObject.transform.Find("Bows");
-            Weapon = 2;
         }
     }
 
@@ -146,7 +142,7 @@ public class PlayerLocomotion : MonoBehaviour
                 WeaponContainer.transform.localRotation = Quaternion.Euler(90, 0f, 0f);
             }
         }
-               
+
     }
 
     void PerspectiveCheck()
@@ -175,37 +171,73 @@ public class PlayerLocomotion : MonoBehaviour
     void WeaponsCheck()
     {
         SwitchPerspective switchPerspective = GetComponent<SwitchPerspective>();
-        if (switchPerspective.GetPerspective() == SwitchPerspective.Perspective.First) 
+        if (switchPerspective.GetPerspective() == SwitchPerspective.Perspective.First)
         {
+            ArmContainer.gameObject.SetActive(false);
             if (SwapAction.WasPressedThisFrame())
             {
                 SwitchWeapons switchWeapons = GetComponent<SwitchWeapons>();
 
                 if (switchWeapons != null)
                 {
-                    if (switchWeapons.GetWeapons() == SwitchWeapons.Weapons.Gun)
-                    {
-                        switchWeapons.SetWeapons(SwitchWeapons.Weapons.Bow);
-                    }
-                    else
-                    {
-                        switchWeapons.SetWeapons(SwitchWeapons.Weapons.Gun);
-                    }
-
-                    SetCurrentWeapon();
+                    SwapWeapons(false, switchWeapons, true);
                 }
             }
         }
         else
         {
             SwitchWeapons switchWeapons = GetComponent<SwitchWeapons>();
-
             if (switchWeapons != null)
             {
-                switchWeapons.SetWeapons(SwitchWeapons.Weapons.Gun);
-                SetCurrentWeapon();
+                SwapWeapons(true, switchWeapons, SwapAction.WasPressedThisFrame());
             }
         }
+    }
 
+    void SwapWeapons(bool ThirdPerson, SwitchWeapons switchWeapons, bool Swap)
+    {
+        ArmContainer.gameObject.SetActive(false);
+        if(!Swap)
+        {
+            if (switchWeapons.GetWeapons() == SwitchWeapons.Weapons.Bow)
+            {
+                SwapWeapons(true, switchWeapons, true);
+            }
+        }
+        else
+        {
+            if (switchWeapons.GetWeapons() == SwitchWeapons.Weapons.Gun)
+            {
+                if (ThirdPerson)
+                {
+                    switchWeapons.SetWeapons(SwitchWeapons.Weapons.Sword);
+                    WeaponContainer = gameObject.transform.Find("Swords");
+                    ArmContainer.gameObject.SetActive(true);
+                    Weapon = 3;
+                }
+                else
+                {
+                    switchWeapons.SetWeapons(SwitchWeapons.Weapons.Bow);
+                    WeaponContainer = gameObject.transform.Find("Bows");
+                    Weapon = 2;
+                }
+            }
+            else if (switchWeapons.GetWeapons() == SwitchWeapons.Weapons.Bow)
+            {
+                switchWeapons.SetWeapons(SwitchWeapons.Weapons.Sword);
+                WeaponContainer = gameObject.transform.Find("Swords");
+                if (ThirdPerson)
+                {
+                    ArmContainer.gameObject.SetActive(true);
+                }
+                Weapon = 3;
+            }
+            else
+            {
+                switchWeapons.SetWeapons(SwitchWeapons.Weapons.Gun);
+                WeaponContainer = gameObject.transform.Find("Guns");
+                Weapon = 1;
+            }
+        }
     }
 }

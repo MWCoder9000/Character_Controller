@@ -6,17 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class MenuControls : MonoBehaviour
 {
+    #region Scenes
     [SerializeField] string playScene = "PlayerSandboxScene";
     [SerializeField] string mainMenuScene = "StartScreen";
+    #endregion
 
+    #region Panels
     [Tooltip("Drag in an options menu panel, if one exists")]
     [SerializeField] GameObject optionsMenuPanel;
 
     [Tooltip("Drag in an pause menu panel, if one exists")]
     [SerializeField] GameObject pauseMenuPanel;
 
+    [Tooltip("Drag in a high scores panel, if one exists")]
+    [SerializeField] GameObject highScoresPanel;
+    #endregion
+
     [SerializeField] bool IsPauseMenuAvailable = false;
     [HideInInspector] public static bool IsGamePaused = false;
+    [SerializeField] public bool InMainMenu = true;
 
     PlayerInput playerInput;
     InputAction escapeAction;
@@ -36,7 +44,22 @@ public class MenuControls : MonoBehaviour
 
     void Update()
     {
+        if (!InMainMenu)
+        {
+            GameManager.Instance.Paused = IsGamePaused;
+        }
         PauseMenu();
+    }
+
+    public void HighScoreMenuClose()
+    {
+        highScoresPanel.SetActive(false);
+    }
+
+    public void HighScoreMenuOpen()
+    {
+        highScoresPanel.GetComponent<HighScoreSystem>().UpdateHighScoreUI();
+        highScoresPanel.SetActive(true);
     }
 
     public void PauseMenu()
@@ -90,13 +113,14 @@ public class MenuControls : MonoBehaviour
     {
         Resume();
         Cursor.visible = true;
+        InMainMenu = true;
         SceneManager.LoadScene(mainMenuScene);
     }
 
     public void StartGame()
     {
         Cursor.visible = false;
-       // GameManager.Instance.MainMenu = true;
+        InMainMenu = false;
         SceneManager.LoadScene(playScene);
     }
 

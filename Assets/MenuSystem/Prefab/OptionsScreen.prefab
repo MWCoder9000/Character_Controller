@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9141619101488544043
 RectTransform:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.23018861, g: 0.23018861, b: 0.23018861, a: 1}
+  m_Color: {r: 0.4560168, g: 0.43867922, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -171,6 +171,22 @@ PrefabInstance:
     - target: {fileID: 6474959757753096166, guid: e4183a3e0f5cf7944a23c3c7e9028e9e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8062866094600383638, guid: e4183a3e0f5cf7944a23c3c7e9028e9e, type: 3}
+      propertyPath: m_Name
+      value: BackTXT
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435754950779596026, guid: e4183a3e0f5cf7944a23c3c7e9028e9e, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.4509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435754950779596026, guid: e4183a3e0f5cf7944a23c3c7e9028e9e, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.4509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435754950779596026, guid: e4183a3e0f5cf7944a23c3c7e9028e9e, type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.4509804
       objectReference: {fileID: 0}
     - target: {fileID: 8435754950779596026, guid: e4183a3e0f5cf7944a23c3c7e9028e9e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

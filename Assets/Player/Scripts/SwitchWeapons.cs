@@ -7,13 +7,15 @@ public class SwitchWeapons : MonoBehaviour
     public enum Weapons
     {
         Bow,
-        Gun
+        Gun,
+        Sword
     };
 
     public enum ContainerName
     {
         Guns,
-        Bows
+        Bows,
+        Swords
     };
 
     [SerializeField]
@@ -33,9 +35,11 @@ public class SwitchWeapons : MonoBehaviour
     {
         weaponNameByWeapons.Add(Weapons.Bow, ContainerName.Bows);
         weaponNameByWeapons.Add(Weapons.Gun, ContainerName.Guns);
+        weaponNameByWeapons.Add(Weapons.Sword, ContainerName.Swords);
 
         weaponContainerByName.Add(ContainerName.Guns, gameObject.transform.Find(ContainerName.Guns.ToString()));
         weaponContainerByName.Add(ContainerName.Bows, gameObject.transform.Find(ContainerName.Bows.ToString()));
+        weaponContainerByName.Add(ContainerName.Swords, gameObject.transform.Find(ContainerName.Swords.ToString()));
     }
 
     void DisableAllContainers()

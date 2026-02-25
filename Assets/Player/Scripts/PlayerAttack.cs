@@ -22,8 +22,6 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float rateOfFire = 2f;
     [SerializeField] float shotSpeed = 800f;
     [SerializeField] float ElapsedTime = 0;
-
-    public bool isAlive = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
@@ -39,7 +37,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isAlive)
+        if (!GameManager.Instance.Paused && !GameManager.Instance.Dead)
         {
             FireWeapon();
         }
@@ -52,40 +50,58 @@ public class PlayerAttack : MonoBehaviour
         {
             if (switchWeapons.GetWeapons() == SwitchWeapons.Weapons.Gun)
             {
-                cameraTransform = Camera.main.transform;
-                Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
-                RaycastHit raycastHit;
-                Debug.DrawRay(cameraTransform.position, cameraTransform.forward * range, Color.black, 1f);
-                if (Physics.Raycast(ray, out raycastHit, range, layermask))
-                {
-                    if (raycastHit.transform != null)
-                    {
-                        raycastHit.collider.SendMessageUpwards("Hit", rawDamage, SendMessageOptions.DontRequireReceiver);
-                    }
-                }
-                else
-                {
-                    Debug.Log("NO RAYCAST");
-                }
-
+                Gun();
             }
-            else //Bow
+            else if (switchWeapons.GetWeapons() == SwitchWeapons.Weapons.Bow)
             {
-                if (ElapsedTime%60 < 0)
-                {
-                    GameObject shotInstance = Instantiate(shot,
-                                                  shotSpawn.transform.position,
-                                                  shotSpawn.transform.rotation);
-
-                    shotInstance.GetComponent<Rigidbody>()
-                        .AddForce(shotSpawn.transform.forward * shotSpeed);
-                    ElapsedTime = rateOfFire;
-                }
-                else
-                {
-                    ElapsedTime -= Time.deltaTime;
-                }
+                Bow();
+            }
+            else
+            {
+                Sword();
             }
         }
+    }
+
+    void Gun()
+    {
+        cameraTransform = Camera.main.transform;
+        Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+        RaycastHit raycastHit;
+        Debug.DrawRay(cameraTransform.position, cameraTransform.forward * range, Color.black, 1f);
+        if (Physics.Raycast(ray, out raycastHit, range, layermask))
+        {
+            if (raycastHit.transform != null)
+            {
+                raycastHit.collider.SendMessageUpwards("Hit", rawDamage, SendMessageOptions.DontRequireReceiver);
+            }
+        }
+        else
+        {
+            Debug.Log("NO RAYCAST");
+        }
+    }
+
+    void Bow()
+    {
+        if (ElapsedTime % 60 < 0)
+        {
+            GameObject shotInstance = Instantiate(shot,
+                                          shotSpawn.transform.position,
+                                          shotSpawn.transform.rotation);
+
+            shotInstance.GetComponent<Rigidbody>()
+                .AddForce(shotSpawn.transform.forward * shotSpeed);
+            ElapsedTime = rateOfFire;
+        }
+        else
+        {
+            ElapsedTime -= Time.deltaTime;
+        }
+    }
+
+    void Sword()
+    {
+
     }
 }
