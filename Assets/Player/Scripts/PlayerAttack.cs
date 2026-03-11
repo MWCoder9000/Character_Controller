@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -37,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.Paused && !GameManager.Instance.Dead)
+        if (!GameManager.Instance.Paused || !GameManager.Instance.Dead)
         {
             FireWeapon();
         }
@@ -69,11 +72,20 @@ public class PlayerAttack : MonoBehaviour
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
         RaycastHit raycastHit;
         Debug.DrawRay(cameraTransform.position, cameraTransform.forward * range, Color.black, 1f);
-        if (Physics.Raycast(ray, out raycastHit, range, layermask))
+
+        bool hit = Physics.Raycast(ray, out raycastHit, range, layermask);
+
+        float drawDistance = hit ? raycastHit.distance : range;
+        Debug.DrawRay(ray.origin, ray.direction * drawDistance, Color.red);
+
+        if (hit)
         {
             if (raycastHit.transform != null)
             {
-                raycastHit.collider.SendMessageUpwards("Hit", rawDamage, SendMessageOptions.DontRequireReceiver);
+                if (Physics.Raycast(ray, out raycastHit, range, layermask))
+                {
+                    raycastHit.collider.SendMessageUpwards("Hit", rawDamage, SendMessageOptions.DontRequireReceiver);
+                }
             }
         }
         else

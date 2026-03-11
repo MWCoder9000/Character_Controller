@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3524202431790900395}
   - component: {fileID: 7055469626144323609}
   - component: {fileID: 8264810841333425194}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyObject
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   playerTransform: {fileID: 0}
+  layermask:
+    serializedVersion: 2
+    m_Bits: 0
   rawDamage: 50
   delayTimer: 2
 --- !u!114 &7055469626144323609
@@ -99,7 +102,7 @@ GameObject:
   - component: {fileID: 6500519359292219128}
   - component: {fileID: 4596304256636852433}
   - component: {fileID: 7634808761678616454}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyModel
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -212,7 +215,7 @@ GameObject:
   - component: {fileID: 8598698022175077500}
   - component: {fileID: 5284834127361638024}
   - component: {fileID: 2915088335486829187}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -322,7 +325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4428123075018126006}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gun
   m_TagString: Enemy
   m_Icon: {fileID: 0}

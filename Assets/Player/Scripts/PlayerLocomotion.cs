@@ -63,7 +63,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     void Update()
     {
-        if (!GameManager.Instance.Dead && !GameManager.Instance.Paused)
+        if (!GameManager.Instance.Dead || !GameManager.Instance.Paused)
         {
             Locomotion();
             RotateAndLook();

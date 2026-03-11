@@ -11,6 +11,8 @@ public class EnemyAttack : MonoBehaviour
     float distanceToTarget;
 
     [SerializeField]
+    LayerMask layermask;
+    [SerializeField]
     float rawDamage = 10f;
 
     [SerializeField]
@@ -64,7 +66,7 @@ public class EnemyAttack : MonoBehaviour
                 Ray ray = new Ray(gunTransform.position, gunTransform.forward);
                 RaycastHit raycastHit;
 
-                if (Physics.Raycast(ray, out raycastHit, maxDistanceToTarget))
+                if (Physics.Raycast(ray, out raycastHit, maxDistanceToTarget, layermask))
                 {
                     Debug.Log("Enemy Shoots");
                     if (raycastHit.transform != null)

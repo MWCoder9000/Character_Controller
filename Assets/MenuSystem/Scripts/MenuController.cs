@@ -28,8 +28,6 @@ public class MenuControls : MonoBehaviour
 
     PlayerInput playerInput;
     InputAction escapeAction;
-
-    public bool isAlive = true;
     void OnEnable()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -64,7 +62,7 @@ public class MenuControls : MonoBehaviour
 
     public void PauseMenu()
     {
-        if (isAlive)
+        if (!GameManager.Instance.Dead)
         {
             if (IsPauseMenuAvailable)
             {
