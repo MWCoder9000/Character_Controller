@@ -81,9 +81,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1897165719878125694, guid: 3c85612cb2a061a49bd65384274a3b48, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8507800861366790544}
-    - targetCorrespondingSourceObject: {fileID: 1897165719878125694, guid: 3c85612cb2a061a49bd65384274a3b48, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 2784132964404482541, guid: 3c85612cb2a061a49bd65384274a3b48, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5730410173165650591}
+      addedObject: {fileID: 2264063838764841019}
   m_SourcePrefab: {fileID: 100100000, guid: 3c85612cb2a061a49bd65384274a3b48, type: 3}
 --- !u!1 &6815236380571714556 stripped
 GameObject:
@@ -137,13 +137,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  playerTransform: {fileID: 0}
   MeshAgent: {fileID: 367409897280449503}
   TargetFound: 0
   Stopped: 0
-  layermask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &8507800861366790544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,24 +160,33 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
---- !u!65 &5730410173165650591
-BoxCollider:
+--- !u!4 &7028417139734108881 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2686809958614815059, guid: 3c85612cb2a061a49bd65384274a3b48, type: 3}
+  m_PrefabInstance: {fileID: 4954103946259565442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7089714080107289199 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2784132964404482541, guid: 3c85612cb2a061a49bd65384274a3b48, type: 3}
+  m_PrefabInstance: {fileID: 4954103946259565442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2264063838764841019
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6815236380571714556}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
+  m_GameObject: {fileID: 7089714080107289199}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 1, z: 7}
-  m_Center: {x: 0, y: 1.5, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f8f6fb86207e1438b452794a2872be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeardHitbox
+  playerTransform: {fileID: 0}
+  gunTransform: {fileID: 8769450975888144692}
+  EnemyTransform: {fileID: 7028417139734108881}
+--- !u!4 &8769450975888144692 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4428123075018126006, guid: 3c85612cb2a061a49bd65384274a3b48, type: 3}
+  m_PrefabInstance: {fileID: 4954103946259565442}
+  m_PrefabAsset: {fileID: 0}

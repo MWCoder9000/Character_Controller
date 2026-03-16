@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7055469626144323609}
   - component: {fileID: 8264810841333425194}
   m_Layer: 7
-  m_Name: EnemyObject
+  m_Name: TurretEnemyObject
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

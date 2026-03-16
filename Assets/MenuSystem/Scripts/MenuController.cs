@@ -25,7 +25,7 @@ public class MenuControls : MonoBehaviour
     [SerializeField] bool IsPauseMenuAvailable = false;
     [HideInInspector] public static bool IsGamePaused = false;
     [SerializeField] public bool InMainMenu = true;
-
+    bool FirstRun = true;
     PlayerInput playerInput;
     InputAction escapeAction;
     void OnEnable()
@@ -42,9 +42,10 @@ public class MenuControls : MonoBehaviour
 
     void Update()
     {
-        if (!InMainMenu)
+        if (!InMainMenu && FirstRun)
         {
-            GameManager.Instance.Paused = IsGamePaused;
+            GameManager.Instance.Paused = false;
+            FirstRun = false;
         }
         PauseMenu();
     }
@@ -68,7 +69,7 @@ public class MenuControls : MonoBehaviour
             {
                 if (escapeAction.triggered)
                 {
-                    if (IsGamePaused)
+                    if (GameManager.Instance.Paused)
                     {
                         Resume();
                     }
@@ -96,7 +97,7 @@ public class MenuControls : MonoBehaviour
         Cursor.visible = true;
         pauseMenuPanel.SetActive(true);
         Time.timeScale = 0f;
-        IsGamePaused = true;
+        GameManager.Instance.Paused = true;
     }
 
     public void Resume()
@@ -104,7 +105,7 @@ public class MenuControls : MonoBehaviour
         Cursor.visible = false;
         pauseMenuPanel.SetActive(false);
         Time.timeScale = 1f;
-        IsGamePaused = false;
+        GameManager.Instance.Paused = false;
     }
 
     public void ReturnToMainMenu()

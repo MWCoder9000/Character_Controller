@@ -10,7 +10,6 @@ public class EnemyPatrol : MonoBehaviour
     public NavMeshAgent MeshAgent;
     private int PatrolPointChosen = 0;
     public bool TargetFound = false;
-    public bool Stopped = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,7 +41,7 @@ public class EnemyPatrol : MonoBehaviour
         {
             return;
         }
-        if (!Stopped)
+        if (!MeshAgent.isStopped)
         {
             PatrolPointChosen = Random.Range(0, PatrolPoints.Length);
         }
@@ -52,12 +51,18 @@ public class EnemyPatrol : MonoBehaviour
     
     public void SomethingHeard()
     {
-        Stopped = true;
-        MeshAgent.ResetPath();
+        Debug.Log("Reached");
+        MeshAgent.isStopped = true;
     }
 
     public void TargetSeen(bool FoundOrNot)
     {
         TargetFound = FoundOrNot;
+    }
+
+    void TargetLost()
+    {
+
+        MeshAgent.isStopped = false;
     }
 }

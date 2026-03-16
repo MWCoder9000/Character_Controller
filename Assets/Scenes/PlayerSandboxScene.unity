@@ -617,47 +617,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 984178267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &782324006 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7089714080107289199, guid: d7a59bcf0b6697547ae3ecf4844a9fdd, type: 3}
-  m_PrefabInstance: {fileID: 6486363939349724960}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &782324011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782324006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2f8f6fb86207e1438b452794a2872be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HeardHitbox
-  playerTransform: {fileID: 1168729980}
-  gunTransform: {fileID: 1811102019}
-  EnemyTransform: {fileID: 1546214974}
---- !u!65 &782324012
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782324006}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 0.3, z: 7}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,11 +954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!4 &1546214974 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7028417139734108881, guid: d7a59bcf0b6697547ae3ecf4844a9fdd, type: 3}
-  m_PrefabInstance: {fileID: 6486363939349724960}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1778970081 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7726837482848770315, guid: d0f69a7d0c924a448be6c08c428b14fb, type: 3}
@@ -1091,11 +1045,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HighScoreSystem
   highPlayersTMP: []
   highScoresTMP: []
---- !u!4 &1811102019 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8769450975888144692, guid: d7a59bcf0b6697547ae3ecf4844a9fdd, type: 3}
-  m_PrefabInstance: {fileID: 6486363939349724960}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1870272026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,8 +1391,53 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3545512362075110414, guid: fe4119c93c85a324bbc49ddffe6cbdca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1622031897915021978}
+    - targetCorrespondingSourceObject: {fileID: 3545512362075110414, guid: fe4119c93c85a324bbc49ddffe6cbdca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1622031897915021977}
   m_SourcePrefab: {fileID: 100100000, guid: fe4119c93c85a324bbc49ddffe6cbdca, type: 3}
+--- !u!1 &1622031897915021976 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3545512362075110414, guid: fe4119c93c85a324bbc49ddffe6cbdca, type: 3}
+  m_PrefabInstance: {fileID: 1622031897915021975}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1622031897915021977
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622031897915021976}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 5
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1622031897915021978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622031897915021976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f8f6fb86207e1438b452794a2872be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeardHitbox
+  playerTransform: {fileID: 1168729980}
 --- !u!1001 &2075304032498283628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1626,7 +1620,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1897165719878125694, guid: 3c85612cb2a061a49bd65384274a3b48, type: 3}
       propertyPath: m_Name
-      value: EnemyObject
+      value: TurretEnemyObject
       objectReference: {fileID: 0}
     - target: {fileID: 2686809958614815059, guid: 3c85612cb2a061a49bd65384274a3b48, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1685,7 +1679,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6703669580929328446, guid: d7a59bcf0b6697547ae3ecf4844a9fdd, type: 3}
+    - target: {fileID: 2264063838764841019, guid: d7a59bcf0b6697547ae3ecf4844a9fdd, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1168729980}
@@ -1785,17 +1779,10 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1168729980}
-    m_RemovedComponents:
-    - {fileID: 5730410173165650591, guid: d7a59bcf0b6697547ae3ecf4844a9fdd, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7089714080107289199, guid: d7a59bcf0b6697547ae3ecf4844a9fdd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 782324012}
-    - targetCorrespondingSourceObject: {fileID: 7089714080107289199, guid: d7a59bcf0b6697547ae3ecf4844a9fdd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 782324011}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7a59bcf0b6697547ae3ecf4844a9fdd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
