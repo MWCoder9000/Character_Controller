@@ -49,11 +49,11 @@ public class Interactor : MonoBehaviour
                 if (raycastHit.transform != null)
                 {
                     distanceFromActor = Vector3.Distance(transform.position, raycastHit.transform.position);
-                    if(distanceFromActor <= maxInteractableDistance)
+                    if (distanceFromActor <= maxInteractableDistance)
                     {
                         Debug.Log("In range: " + raycastHit.transform.name + " (" + distanceFromActor.ToString("0.00") + "units)");
                         Item item = raycastHit.transform.GetComponent<Item>();
-                        if(item != null)
+                        if (item != null)
                         {
                             item.Interact();
                         }

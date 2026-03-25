@@ -707,10 +707,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff433df18922664a876d4804a4e6dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLocomotion
+  ArmContainer: {fileID: 1230181757055454481}
   speed: 6
   jumpSpeed: 12
   mouseSensitivity: 0.5
-  gravity: 20
+  gravity: 40
   lookUpClamp: -30
   lookDownClamp: 60
 --- !u!114 &4655256551048552557
@@ -759,7 +760,7 @@ MonoBehaviour:
   rawDamage: 20
   layermask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 183
   rateOfFire: 0.01
   shotSpeed: 800
   ElapsedTime: 0
@@ -950,7 +951,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9212001390840129860
 Transform:
   m_ObjectHideFlags: 0
@@ -983,7 +984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8969293684517385102
 Transform:
   m_ObjectHideFlags: 0
@@ -1128,7 +1129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8133019779135600788
 Transform:
   m_ObjectHideFlags: 0
@@ -1192,7 +1193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6686957122578747943
 Transform:
   m_ObjectHideFlags: 0
@@ -1227,7 +1228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1230181757055454481
 Transform:
   m_ObjectHideFlags: 0

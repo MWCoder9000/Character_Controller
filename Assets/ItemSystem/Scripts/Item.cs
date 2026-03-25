@@ -125,6 +125,15 @@ public class Item : MonoBehaviour
             }
             GameManager.IncrementScore(pointValue);
         }
+        if(itemName == "Lever")
+        {
+            Lever lever = transform.GetComponent<Lever>();
+            if (lever != null)
+            {
+                Debug.Log("Lever Flipped");
+                lever.FlipSwitch();
+            }
+        }
     }
     // Update is called once per frame
     void Update()
